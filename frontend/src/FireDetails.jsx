@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, CircleMarker } from "react-leaflet";
 import RiskPanel from "./components/RiskPanel";
 import { CLASS_COLORS } from "./constants";
 
@@ -20,6 +22,24 @@ function fmtDate(value) {
 export default function FireDetails({ event, onClose }) {
   const open = !!event;
   const color = event ? CLASS_COLORS[event.classification] : "#5b6b84";
+  
+  const [afterOpacity, setAfterOpacity] = useState(1);
+
+  // Reset opacity when switching events
+  useEffect(() => {
+    setAfterOpacity(1);
+  }, [event?.id]);
+
+  let beforeDateStr = "";
+  let afterDateStr = "";
+
+  if (event?.acquisition_time) {
+    const afterDate = new Date(event.acquisition_time);
+    afterDateStr = afterDate.toISOString().split("T")[0];
+
+    const beforeDate = new Date(afterDate.getTime() - 5 * 24 * 60 * 60 * 1000);
+    beforeDateStr = beforeDate.toISOString().split("T")[0];
+  }
 
   return (
     <div className={`detail-panel ${open ? "open" : ""}`}>
@@ -104,6 +124,46 @@ export default function FireDetails({ event, onClose }) {
                 </div>
               </>
             )}
+
+            <div className="satellite-before-after" style={{ marginTop: 24, padding: 12, background: "#101621", borderRadius: 8, border: "1px solid #1f2937" }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#8996a8", marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>Satellite View (Before / After)</div>
+              <div style={{ height: 180, width: "100%", borderRadius: 6, overflow: "hidden", position: "relative" }}>
+                <MapContainer 
+                  center={[event.latitude, event.longitude]} 
+                  zoom={8} 
+                  maxZoom={9}
+                  zoomControl={false} 
+                  attributionControl={false}
+                  dragging={false}
+                  scrollWheelZoom={false}
+                  doubleClickZoom={false}
+                  style={{ height: "100%", width: "100%", zIndex: 1 }}
+                  key={event.id}
+                >
+                  <TileLayer
+                    url={`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${beforeDateStr}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`}
+                    maxZoom={9}
+                  />
+                  <TileLayer
+                    url={`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${afterDateStr}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`}
+                    maxZoom={9}
+                    opacity={afterOpacity}
+                  />
+                  <CircleMarker center={[event.latitude, event.longitude]} radius={6} pathOptions={{ color: "#ef4444", fillColor: "transparent", weight: 2 }} />
+                </MapContainer>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", marginTop: 12, gap: 12 }}>
+                <span style={{ fontSize: 12, color: afterOpacity < 0.5 ? "#fff" : "#64748b", transition: "color 0.2s" }}>Before</span>
+                <input 
+                  type="range" 
+                  min="0" max="1" step="0.01" 
+                  value={afterOpacity} 
+                  onChange={(e) => setAfterOpacity(parseFloat(e.target.value))}
+                  style={{ flex: 1, accentColor: "#ef4444", cursor: "pointer" }}
+                />
+                <span style={{ fontSize: 12, color: afterOpacity > 0.5 ? "#fff" : "#64748b", transition: "color 0.2s" }}>After</span>
+              </div>
+            </div>
           </div>
 
           <RiskPanel event={event} />
