@@ -11,7 +11,7 @@
 Satellite systems like NASA FIRMS can detect thermal anomalies, but they cannot tell you **what** is causing them. THERMAGUARD AI solves this by combining:
 
 - 🛰️ **NASA FIRMS satellite thermal data**
-- 🏭 **OpenStreetMap industrial infrastructure context**
+- 🏭 **CARTO industrial infrastructure context**
 - 🤖 **Random Forest Machine Learning classifier**
 
 ...to classify every thermal event, detect persistent sources, calculate a transparent risk score, and display everything on an interactive GIS dashboard.
@@ -33,9 +33,9 @@ Satellite systems like NASA FIRMS can detect thermal anomalies, but they cannot 
 ## ⚙️ How It Works
 
 ```
-NASA FIRMS  ──┐
-              ├─► Ingestion & Normalization ─► OSM Industrial Context ─► Feature Engineering
-OSM/Overpass ─┘                                                                │
+CARTO       ──┐
+              ├─► Ingestion & Normalization ─► CARTO Industrial Context ─► Feature Engineering
+CARTO API   ──┘                                                                │
                                                                                 ▼
                                         Persistence Detection ◄─── ML Classification
                                                 │
@@ -55,7 +55,7 @@ OSM/Overpass ─┘                                                             
 For every thermal detection, the system:
 
 1. Normalizes raw detection data (handles missing fields gracefully)
-2. Finds nearest industrial facility + counts nearby facilities (OSM data)
+2. Finds nearest industrial facility + counts nearby facilities (CARTO data)
 3. Builds feature vector and classifies with trained Random Forest
 4. Checks for repeated detections in same area (persistence)
 5. Computes transparent 0–100 risk score with plain-language reasons
@@ -80,7 +80,7 @@ For every thermal detection, the system:
 ## ✨ Features
 
 - FIRMS-style thermal ingestion with automatic demo-data fallback
-- OSM/Overpass industrial infrastructure lookup with demo-data fallback
+- CARTO industrial infrastructure lookup with demo-data fallback
 - 5-class ML fire classification with confidence + full probability distribution
 - Rule-based heuristic fallback classifier if trained model is missing
 - Persistence detection (repeated detections within configurable radius)
@@ -185,7 +185,7 @@ See `.env.example` — every value has a safe default. The app runs **fully offl
 | Variable | Required | Purpose |
 |---|---|---|
 | NASA_FIRMS_API_KEY | Optional | Live satellite data (demo CSV used if missing) |
-| OVERPASS_URL | Optional | Live OSM queries (demo CSV used if missing) |
+| OVERPASS_URL | Optional | Live CARTO queries (demo CSV used if missing) |
 | DATABASE_URL | Optional | PostgreSQL connection (defaults to local SQLite) |
 | CORS_ORIGINS | Optional | Allowed frontend origins |
 
