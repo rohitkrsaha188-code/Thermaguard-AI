@@ -86,6 +86,8 @@ For every thermal detection, the system:
 - Persistence detection (repeated detections within configurable radius)
 - Transparent, explainable risk scoring (0–100) with itemised reasons
 - Interactive Leaflet map: colour-coded event markers, industrial sites, click-to-inspect
+- Toggleable Esri World Imagery satellite view on the main map
+- Interactive before/after historical satellite imagery (NASA GIBS) slider in Fire Details
 - Command-centre dashboard: stat cards + 4 analytics charts
 - High / Critical alert panel with map-focus on click
 - Filtering by classification, risk level, persistence, industrial proximity
@@ -302,7 +304,6 @@ No configuration needed to demo the full flow offline.
 
 - Train on real labelled FIRMS + verified industrial incident data
 - PostGIS-backed spatial queries instead of in-memory haversine loops
-- Sentinel-2 satellite imagery overlay for visual event inspection
 - Historical trend analytics and facility-level risk profiles
 - Role-based access and audit logging for operational deployment
 - Push / SMS alerting for Critical events
