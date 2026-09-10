@@ -1,0 +1,30 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite3
+
+# ML models (regenerate with `python ml/train.py`)
+models/*.pkl
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.vite/
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+*.log

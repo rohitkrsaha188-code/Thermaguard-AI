@@ -1,0 +1,19 @@
+id,name,type,latitude,longitude,source
+IS-001,Jamnagar Refinery Complex,refinery,22.3511,69.825,demo
+IS-002,Vizag Steel Plant,steel,17.6868,83.2185,demo
+IS-003,Bokaro Steel City Plant,steel,23.6693,86.1511,demo
+IS-004,Dahej Petrochemical Complex,petrochemical,21.7051,72.568,demo
+IS-005,Vindhyachal Thermal Power Station,power_plant,24.0975,82.6425,demo
+IS-006,Talcher Coal Mines,mine,20.95,85.2333,demo
+IS-007,Dhamra LNG Terminal,lng,20.8167,86.9333,demo
+IS-008,Paradip Refinery,refinery,20.265,86.611,demo
+IS-009,Korba Thermal Power Plant,power_plant,22.3595,82.7501,demo
+IS-010,Jharia Coalfield,mine,23.7398,86.4131,demo
+IS-011,Hazira Petrochemical Hub,petrochemical,21.1167,72.65,demo
+IS-012,Rourkela Steel Plant,steel,22.2604,84.8536,demo
+IS-013,Kochi Refinery,refinery,9.9667,76.2833,demo
+IS-014,Dabhol LNG Terminal,lng,17.5833,73.1667,demo
+IS-015,Singrauli Power Cluster,power_plant,24.1994,82.6772,demo
+IS-016,Angul Industrial Estate,steel,20.84,85.1,demo
+IS-017,Barmer Oilfield Cluster,refinery,25.7521,71.3961,demo
+IS-018,Neyveli Lignite Mines,mine,11.6104,79.4737,demo
