@@ -1,6 +1,6 @@
 import L from "leaflet";
 import { useMemo, useRef } from "react";
-import { CircleMarker, MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { CircleMarker, MapContainer, Marker, Popup, TileLayer, useMap, LayersControl } from "react-leaflet";
 
 import { CLASS_COLORS, RISK_COLORS } from "./constants";
 
@@ -41,10 +41,21 @@ export default function Map({ events, industrialSites, selectedEvent, onSelectEv
   return (
     <MapContainer center={center} zoom={5} className="leaflet-container">
       <MapController mapRef={mapRef} />
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png?key=cb1_328h_1_73d0124bd69f096f2afe7cb4"
-      />
+      
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="Dark Map">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png?key=cb1_328h_1_73d0124bd69f096f2afe7cb4"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Satellite">
+          <TileLayer
+            attribution='&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
 
       {industrialSites.map((site) => (
         <Marker key={site.id} position={[site.latitude, site.longitude]} icon={INDUSTRIAL_ICON}>
