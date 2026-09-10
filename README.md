@@ -73,7 +73,7 @@ For every thermal detection, the system:
 | **Backend** | Python, FastAPI, Pydantic, SQLAlchemy, Uvicorn |
 | **ML** | scikit-learn (Random Forest), Pandas, NumPy |
 | **Database** | SQLite (default, zero setup) · PostgreSQL/PostGIS-ready |
-| **GIS** | Leaflet, OpenStreetMap tiles |
+| **GIS** | Leaflet, CARTO Dark Matter, Esri World Imagery |
 
 ---
 
