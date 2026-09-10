@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THERMAGUARD AI - Prototype</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="header-logo">
+        <span class="logo-text">THERMAGUARD AI</span>
+        <span class="logo-sub">Satellite Intelligence & Industrial Fire Monitoring</span>
+      </div>
+      <div class="header-actions">
+        <span class="badge">DEMO MODE</span>
+      </div>
+    </header>
+    
+    <div class="main-content">
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3>High & Critical Alerts</h3>
+          <div id="alerts-container"></div>
+        </div>
+      </aside>
+      
+      <main class="map-area">
+        <div id="map"></div>
+        <div id="details-panel" class="detail-panel">
+           <!-- Populated by JS -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
